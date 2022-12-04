@@ -1,0 +1,22 @@
+void sortColors(vector<int>& nums) {
+        vector<int>sorted(nums.size());
+        int max=0;
+        for(int i=0;i<nums.size();i++){
+            if(max<nums[i]){
+                max=nums[i];
+            }
+        }
+        vector<int>f(max+1);
+        for(int i=0;i<nums.size();i++){
+            f[nums[i]]++;
+        }
+        for(int i=1;i<max+1;i++){
+            f[i]+=f[i-1];
+        }
+        for(int i=0;i<nums.size();i++){
+            sorted[--f[nums[i]]]=nums[i];
+        }
+        for(int i=0;i<nums.size();i++){
+            nums[i]=sorted[i];
+        }
+    }

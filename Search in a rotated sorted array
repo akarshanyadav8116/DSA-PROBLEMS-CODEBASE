@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int beg=0,last=nums.size()-1;
+        while(beg<=last&&nums[beg]<=target){
+            beg++;
+            if(nums[beg]==target){
+                return beg;
+            }
+        }
+        //cout<<beg<<" ";
+        while(beg<=last&&nums[last]>=target){
+            last--;
+            if(nums[last]==target){
+                return last;
+            }
+        }
+        cout<<last;
+        return -1;
+    }
+};

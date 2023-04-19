@@ -1,0 +1,73 @@
+class MyQueue {
+public:
+    int arr1[101]={0};
+    int arr2[101]={0};
+    int top1;
+    int top2;
+    MyQueue() {
+        top1=top2=-1;
+    }
+    
+    void push(int x) {
+        arr1[top1+1]=x;
+        top1++;
+    }
+    
+    int pop() {
+        if(!empty()){
+            while(top1!=0){
+                arr2[top2+1]=arr1[top1];
+                top2++;
+                arr1[top1]=0;
+                top1--;
+            }
+            int a=arr1[top1];
+            arr1[top1]=0;
+            top1--;
+            while(top2!=-1){
+                arr1[top1+1]=arr2[top2];
+                top1++;
+                arr2[top2]=0;
+                top2--;
+            }
+            return a;
+        }
+        return -1;
+    }
+    
+    int peek() {
+        if(!empty()){
+            while(top1!=0){
+                arr2[top2+1]=arr1[top1];
+                top2++;
+                arr1[top1]=0;
+                top1--;
+            }
+            int a=arr1[top1];
+            while(top2!=-1){
+                arr1[top1+1]=arr2[top2];
+                top1++;
+                arr2[top2]=0;
+                top2--;
+            }
+            return a;
+        }
+        return -1;
+    }
+    
+    bool empty() {
+        if(top1==-1&&top2==-1){
+            return true;
+        }
+        return false;
+    }
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */

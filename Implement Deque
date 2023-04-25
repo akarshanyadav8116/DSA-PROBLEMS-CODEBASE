@@ -1,0 +1,121 @@
+#include <bits/stdc++.h> 
+class Deque
+{
+public:
+    // Initialize your data structure.
+    int arr[1000];
+    int front;
+    int rear;
+    int size;
+    Deque(int n)
+    {
+        // Write your code here.
+        front=rear=-1;
+        size=n;
+    }
+
+    // Pushes 'X' in the front of the deque. Returns true if it gets pushed into the deque, and false otherwise.
+    bool pushFront(int x)
+    {
+        // Write your code here.
+        if(!isFull()){
+            if(front==-1){
+                front=0;
+                rear=0;
+            }
+            else{
+                front=(front-1+size)%size;
+            }
+            arr[front]=x;
+            return true;
+        }
+        return false;
+    }
+
+    // Pushes 'X' in the back of the deque. Returns true if it gets pushed into the deque, and false otherwise.
+    bool pushRear(int x)
+    {
+        // Write your code here.
+        if(!isFull()){
+            if(front==-1){
+                front=0;
+            }
+            rear=(rear+1)%size;
+            arr[rear]=x;
+            return true;
+        }
+        return false;
+    }
+
+    // Pops an element from the front of the deque. Returns -1 if the deque is empty, otherwise returns the popped element.
+    int popFront()
+    {
+        // Write your code here.
+        if(!isEmpty()){
+            int x=arr[front];
+            if(front==rear){
+                front=rear=-1;   
+            }
+            else
+            front=(front+1)%size;
+            return x;
+        }
+        return -1;
+    }
+
+    // Pops an element from the back of the deque. Returns -1 if the deque is empty, otherwise returns the popped element.
+    int popRear()
+    {
+        // Write your code here.
+        if(!isEmpty()){
+            int x=arr[rear];
+            if(front==rear){
+                front=rear=-1;
+            }
+            else
+                rear=(rear-1+size)%size;
+            return x;
+        }
+        return -1;
+    }
+
+    // Returns the first element of the deque. If the deque is empty, it returns -1.
+    int getFront()
+    {
+        // Write your code here.
+        if(!isEmpty()){
+            return arr[front];
+        }
+        return -1;
+    }
+
+    // Returns the last element of the deque. If the deque is empty, it returns -1.
+    int getRear()
+    {
+        // Write your code here.
+        if(!isEmpty()){
+            return arr[rear];
+        }
+        return -1;
+    }
+
+    // Returns true if the deque is empty. Otherwise returns false.
+    bool isEmpty()
+    {
+        // Write your code here.
+        if(front==-1&&rear==-1){
+            return true;
+        }
+        return false;
+    }
+
+    // Returns true if the deque is full. Otherwise returns false.
+    bool isFull()
+    {
+        // Write your code here.
+        if((rear+1)%size==front){
+            return true;
+        }
+        return false;
+    }
+};
